@@ -7,7 +7,7 @@
 // ==/UserScript==
 var refreshSec = 5;
 alert("start grab");
-var all = []
+var all = [];
 var time = setInterval(function() {
    $("table.line-item-layout tr.line-product").each(function() {
       var infos = [];
@@ -21,23 +21,20 @@ var time = setInterval(function() {
       infos.push(a.attr("title"));
       var curUrl = window.location.href;
       infos.push(curUrl.substring(0, curUrl.lastIndexOf("/")+1) + a.attr("href"));
+      var groupstage =$(this).find("span.groupstage").text();
+      infos.push(groupstage);
       all.push(infos.join("\t"));
    });
    var curA = $("#paging_pageNum a.PageIndex");
    var nextA = curA.next();
    if (nextA.attr('id') != "paging_Next") {
-       nextA.click();   
+       nextA.click();
    } else {
       alert("Please press  shift+ctrl+j to copy");
       console.clear();
       console.info(all.join("\n"));
-      clearInterval(time)
+      clearInterval(time);
    }
-   
 }, refreshSec * 1000);
-
-
-
-
 
 
